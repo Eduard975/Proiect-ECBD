@@ -1,3 +1,48 @@
+function genereazaIstoricInterventii() {
+  const tipuriInterventii = [
+    "Inspectie sezon primavara",
+    "Tratament varroa",
+    "Inspectie sezon vara",
+    "Administrare sirop",
+    "Verificare regina",
+    "Tratament nosemoza",
+    "Inspectie sezon toamna",
+    "Pregatire iernare",
+    "Control boli",
+    "Schimbare faguri",
+  ];
+
+  const tipuriDetalii = [
+    "Observatie externa",
+    "Tratament medicamentos",
+    "Aplicare acaricid",
+    "Hranire artificiala",
+    "Interventie curatenie",
+    "Schimbare matca",
+    "Dezinfectie stupina",
+    "Consolidare colonie",
+  ];
+
+  const numarInterventii = Math.floor(Math.random() * 5.9);
+  const istoric_interventii = [];
+
+  for (let j = 0; j < numarInterventii; j++) {
+    istoric_interventii.push({
+      data: new Date(
+        Math.floor(Math.random() * 5.9) + 2020,
+        Math.floor(Math.random() * 12),
+        Math.floor(Math.random() * 28) + 1
+      ),
+      descriere:
+        tipuriInterventii[Math.floor(Math.random() * tipuriInterventii.length)],
+      interventie:
+        tipuriDetalii[Math.floor(Math.random() * tipuriDetalii.length)],
+    });
+  }
+
+  return istoric_interventii;
+}
+
 function insertColonii(dbName, colNum) {
   const nivelSanatateOptions = [
     { nivel: "Sanatoase" },
@@ -8,22 +53,13 @@ function insertColonii(dbName, colNum) {
   const colonii = [];
   for (let i = 0; i < colNum; i++) {
     const stare = nivelSanatateOptions[Math.floor(Math.random() * 3)];
+
     colonii.push({
       specie: `Apis mellifera ${["carnica", "ligustica", "scutellata"][i % 3]}`,
       numar_albine: 25000 + Math.floor(Math.random() * 25000),
       nivel_agresivitate: Math.floor(Math.random() * 10) + 1,
       stare_sanatate: stare,
-      istoric_interventii: [
-        {
-          data: new Date(
-            Math.floor(Math.random() * 25) + 2000,
-            Math.floor(Math.random() * 12) + 1,
-            Math.floor(Math.random() * 28) + 1
-          ),
-          descriere: "Inspectie sezon primavara",
-          interventie: "Observatie externa",
-        },
-      ],
+      istoric_interventii: genereazaIstoricInterventii(),
     });
   }
 
@@ -93,11 +129,11 @@ function insertStupi(dbName, coloniiIds, stupiNum) {
         tip_stup:
           tipStupOptions[Math.floor(Math.random() * tipStupOptions.length)],
         data_instalare: new Date(
-          Math.floor(Math.random() * 25) + 2000,
+          Math.floor(Math.random() * 5.9) + 2020,
           Math.floor(Math.random() * 12),
           Math.floor(Math.random() * 28) + 1
         ),
-        activ: Math.random() < 0.5,
+        activ: Math.random() < 0.7,
         id_colonie: idColonie,
       };
 
