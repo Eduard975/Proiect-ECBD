@@ -10,14 +10,14 @@ function insertColonii(dbName, colNum) {
     const stare = nivelSanatateOptions[Math.floor(Math.random() * 3)];
     colonii.push({
       specie: `Apis mellifera ${["carnica", "ligustica", "scutellata"][i % 3]}`,
-      numar_albine: 25000 + Math.floor(Math.random() * 10000),
-      nivel_agresivitate: Math.floor(Math.random() * 5),
+      numar_albine: 25000 + Math.floor(Math.random() * 25000),
+      nivel_agresivitate: Math.floor(Math.random() * 10) + 1,
       stare_sanatate: stare,
       istoric_interventii: [
         {
           data: new Date(
             Math.floor(Math.random() * 25) + 2000,
-            Math.floor(Math.random() * 12),
+            Math.floor(Math.random() * 12) + 1,
             Math.floor(Math.random() * 28) + 1
           ),
           descriere: "Inspectie sezon primavara",
@@ -97,7 +97,7 @@ function insertStupi(dbName, coloniiIds, stupiNum) {
           Math.floor(Math.random() * 12),
           Math.floor(Math.random() * 28) + 1
         ),
-        activ: Math.random() < 0.85,
+        activ: Math.random() < 0.5,
         id_colonie: idColonie,
       };
 
@@ -122,10 +122,10 @@ function insertRecolte(dbName, stupiIds, recolteNum) {
     recolte.push({
       id_stup: idStup,
       cantitate_kg: parseFloat(
-        (Math.random() * 10 + Math.random() * 10).toFixed(2)
+        (Math.random() * 15 + Math.random() * 15).toFixed(2)
       ),
       data_recolta: new Date(
-        Math.floor(Math.random() * 25) + 2000,
+        Math.floor(Math.random() * 5.9) + 2020,
         Math.floor(Math.random() * 3) + 3,
         Math.floor(Math.random() * 28) + 1
       ),
@@ -153,5 +153,5 @@ function populate_db(dbName, colNum, stupiNum, recolteNum) {
   return logs;
 }
 
-const insertionLogs = populate_db("ECBD_PRJ", 8, 10, 5);
+const insertionLogs = populate_db("ECBD_PRJ", 16, 20, 15);
 printjson(insertionLogs);
